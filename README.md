@@ -44,4 +44,5 @@
 
 ## Referensi
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
+
 [2] Alfathi, B. R. 50% Penduduk Indonesia Diprediksi Kekurangan Air Bersih pada 2050. Artikel Lingkungan, GoodStats. (2025). https://data.goodstats.id/statistic/50-penduduk-indonesia-diprediksi-kekurangan-air-bersih-pada-2050-nNSet
