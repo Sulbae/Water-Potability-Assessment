@@ -54,17 +54,6 @@ Sumber: [Lihat](https://www.kaggle.com/datasets/adityakadiwal/water-potability)
 
 ## Monitoring
 
-## Peluang Lebih Lanjut
-Pengembangan Water Potability Classifier ini diharapkan mampu:  
-  1) mendukung pembuatan early warning sistem sebelum air didistribusikan ke masyarakat,
-  2) memperkuat risk management framework perusahaan,
-  3) dan mengurangi ketergantungan pada inspeksi manual semata.
- 
-Model ini tidak menggantikan uji laboratorium, tetapi berfungsi sebagai sistem pendukung tambahan untuk:
-- Deteksi dini anomali kualitas air
-- Prediksi risiko kontaminasi dan prioritisasi lokasi sampling air
-- Optimasi strategi proses pengolahan air
-
 ## Referensi
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
 
