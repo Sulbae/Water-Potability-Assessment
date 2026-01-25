@@ -12,8 +12,8 @@
 
 ## Scope
 Pengembangan tahap awal, yaitu: 
-   1) membuat model klasifikasi potabilitas air,
-   2) membuat model deteksi anomali kualitas air.
+   1) membuat model **klasifikasi potabilitas air**,
+   2) membuat model **deteksi anomali kualitas air**.
 
 ## Ketersediaan Sumber Daya
 ### Dataset
