@@ -6,6 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import os
+from pathlib import Path 
 import logging
 
 def preprocess_data() -> None:
@@ -13,10 +14,8 @@ def preprocess_data() -> None:
     logging.basicConfig(level=logging.INFO)
 
     # Dataset Source
-    data_folder = "../raw_dataset"
-    file_name = "water_potability_raw.csv"
-
-    data_path = os.path.join(data_folder, file_name)
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    data_path = BASE_DIR / 'raw_dataset' / 'water_potability_raw.csv'
     
     # Load dataset
     data = pd.read_csv(data_path)
