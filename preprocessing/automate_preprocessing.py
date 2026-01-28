@@ -80,10 +80,10 @@ def preprocess_data() -> None:
     os.makedirs(preprocessing_dir, exist_ok=True)
     ## save clf preprocessed data
     clf_train_preprocessed.to_csv(preprocessing_dir / 'clf_train_preprocessed.csv', index=False)
-    clf_test_preprocessed.to_csv(preprocessing_dir / 'clf_test.csv', index=False)
+    clf_test_preprocessed.to_csv(preprocessing_dir / 'clf_test_preprocessed.csv', index=False)
     ## save anom preprocessed data
     anom_train_preprocessed.to_csv(preprocessing_dir / 'anom_train_preprocessed.csv', index=False)
-    anom_test_preprocessed.to_csv(preprocessing_dir / 'anom_test.csv', index=False)
+    anom_test_preprocessed.to_csv(preprocessing_dir / 'anom_test_preprocessed.csv', index=False)
 
     # Export Preprocessing Pipelines
     artifacts_dir = BASE_DIR / 'artifacts'
