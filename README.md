@@ -48,13 +48,24 @@ Sumber: [Lihat](https://www.kaggle.com/datasets/adityakadiwal/water-potability)
    ![heatmap-korelasi](https://github.com/Sulbae/Water-Potability-Assessment/blob/c6bf27c09814fc2e0b5e308ef1b01dd6a54a933b/assets/EDA/heatmap%20korelasi.png)
    
 ### Data Preprocessing
+#### 1) Classifier Model
+
+#### 2) Anomali Detection Model
 
 ## Pengembangan Model
-### Classifier Model
+### 1) Classifier Model
+#### Algorithm
 
-### Anomali Detection Model
+#### Training
 
-### Model Evaluation
+#### Evaluation
+
+### 2) Anomali Detection Model
+#### Algorithm
+
+#### Training
+
+#### Evaluation
 
 ## Realisasi
 ### Deployment
