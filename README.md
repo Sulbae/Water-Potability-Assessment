@@ -34,8 +34,11 @@ Sumber: [Lihat](https://www.kaggle.com/datasets/adityakadiwal/water-potability)
 
 ## Data Preparation
 ### Data Assessment
+Dari total 3276 baris data, ditemukan sebanyak **1434** nilai null/missing value pada dataset. Sementara itu, hasil pemeriksaan menunjukkan tidak ada duplikasi data pada dataset.
 
 ### Data Cleaning
+#### Missing Value Handling
+Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini data parameter kualitas air) yaitu pH (491 null), Sulfate (781 null), dan Trihalomethanes (162 null). Untuk mengatasi kekosongan data ini, maka dilakukan imputasi data menggunakan nilai median untuk menjaga struktur distribusi data. 
 
 ### Data Exploration
 #### 1) Cek Distribusi Data
@@ -48,24 +51,43 @@ Sumber: [Lihat](https://www.kaggle.com/datasets/adityakadiwal/water-potability)
    ![heatmap-korelasi](https://github.com/Sulbae/Water-Potability-Assessment/blob/c6bf27c09814fc2e0b5e308ef1b01dd6a54a933b/assets/EDA/heatmap%20korelasi.png)
    
 ### Data Preprocessing
+#### Preprocessing Pipeline
 #### 1) Classifier Model
+..data split
+..standarisasi
 
 #### 2) Anomali Detection Model
+..data split
+..standarisasi
 
 ## Pengembangan Model
 ### 1) Classifier Model
 #### Algorithm
+RandomForestClassifier()
+..jelaskan konsep kerja
+..kelebihan
+..kekurangan
 
 #### Training
+..hyperparameter tuning
 
 #### Evaluation
+..classification report
+..confusion matrix
 
 ### 2) Anomali Detection Model
 #### Algorithm
+IsolationForest()
+..jelaskan konsep kerja
+..kelebihan
+..kekurangan
 
 #### Training
+..hyperparameter tuning
 
 #### Evaluation
+..classification report
+..confusion matrix
 
 ## Realisasi
 ### Deployment
