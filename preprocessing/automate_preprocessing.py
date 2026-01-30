@@ -24,22 +24,25 @@ def preprocess_data() -> None:
     # Konfigurasi
     TEST_SIZE = 0.2
 
-    # Classifier Data
-    clf_train, clf_test = train_test_split(
+    # Data Split
+    train_df, test_df = train_test_split(
         data,
         test_size=TEST_SIZE,
         stratify=data['Potability'],
         random_state=42
     )
 
+    # Classifier Data
+    clf_X_train = train_df.drop(columns=['Potability'])
+    clf_y_train = train_df['Potability']
+
+    clf_X_test  = test_df.drop(columns=['Potability'])
+    clf_y_test  = test_df['Potability']
+
+
     # Anomali Detection Data
-    anom_data = data[data['Potability'] == 0]
-    anom_X = anom_data.drop(columns=['Potability'])
-    anom_train, anom_test = train_test_split(
-        anom_X,
-        test_size=TEST_SIZE,
-        random_state=42
-    )
+    anom_train = train_df[train_df['Potability'] == 0].drop(columns=['Potability'])
+    anom_test  = clf_X_test.copy()
 
     # Preprocessing Pipeline 
     def preprocessing_pipeline_schema(): 
@@ -52,16 +55,10 @@ def preprocess_data() -> None:
     preprocess_clf = preprocessing_pipeline_schema()
 
     ## Train
-    clf_X_train = clf_train.drop(columns=['Potability'])
-    clf_y_train = clf_train['Potability']
-    
     clf_X_train_preprocessed = preprocess_clf.fit_transform(clf_X_train)
     clf_X_train_preprocessed = pd.DataFrame(clf_X_train_preprocessed, columns=clf_X_train.columns)
     clf_train_preprocessed = pd.concat([clf_X_train_preprocessed, clf_y_train.reset_index(drop=True)], axis=1)
-    ## Test
-    clf_X_test = clf_test.drop(columns=['Potability'])
-    clf_y_test = clf_test['Potability']
-    
+    ## Test  
     clf_X_test_preprocessed = preprocess_clf.transform(clf_X_test)
     clf_X_test_preprocessed = pd.DataFrame(clf_X_test_preprocessed, columns=clf_X_test.columns)
     clf_test_preprocessed = pd.concat([clf_X_test_preprocessed, clf_y_test.reset_index(drop=True)], axis=1)
