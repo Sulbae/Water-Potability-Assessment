@@ -32,18 +32,6 @@ def preprocess_data() -> None:
         random_state=42
     )
 
-    # Classifier Data
-    clf_X_train = train_df.drop(columns=['Potability'])
-    clf_y_train = train_df['Potability']
-
-    clf_X_test  = test_df.drop(columns=['Potability'])
-    clf_y_test  = test_df['Potability']
-
-
-    # Anomali Detection Data
-    anom_train = train_df[train_df['Potability'] == 0].drop(columns=['Potability'])
-    anom_test  = clf_X_test.copy()
-
     # Preprocessing Pipeline 
     def preprocessing_pipeline_schema(): 
         return Pipeline(steps=[
@@ -51,26 +39,29 @@ def preprocess_data() -> None:
         ('scaler', StandardScaler())
     ])
 
-    # Preprocess Classifier Data
-    preprocess_clf = preprocessing_pipeline_schema()
+    preprocess_pipeline = preprocessing_pipeline_schema()
+
+    # Classifier Data
+    clf_X_train = train_df.drop(columns=['Potability'])
+    clf_y_train = train_df['Potability']
+
+    clf_X_test  = test_df.drop(columns=['Potability'])
+    clf_y_test  = test_df['Potability']
 
     ## Train
-    clf_X_train_preprocessed = preprocess_clf.fit_transform(clf_X_train)
+    clf_X_train_preprocessed = preprocess_pipeline.fit_transform(clf_X_train)
     clf_X_train_preprocessed = pd.DataFrame(clf_X_train_preprocessed, columns=clf_X_train.columns)
     clf_train_preprocessed = pd.concat([clf_X_train_preprocessed, clf_y_train.reset_index(drop=True)], axis=1)
     ## Test  
-    clf_X_test_preprocessed = preprocess_clf.transform(clf_X_test)
+    clf_X_test_preprocessed = preprocess_pipeline.transform(clf_X_test)
     clf_X_test_preprocessed = pd.DataFrame(clf_X_test_preprocessed, columns=clf_X_test.columns)
     clf_test_preprocessed = pd.concat([clf_X_test_preprocessed, clf_y_test.reset_index(drop=True)], axis=1)
 
-    # Preprocess Anomaly Detection Data
-    preprocess_anom = preprocessing_pipeline_schema()
+    # Anomali Detection Data
     ## Train
-    anom_train_preprocessed = preprocess_anom.fit_transform(anom_train)
-    anom_train_preprocessed = pd.DataFrame(anom_train_preprocessed, columns=anom_train.columns)
+    anom_train_preprocessed = clf_train_preprocessed[clf_train_preprocessed['Potability'] == 0].drop(columns=['Potability'])
     ## Test
-    anom_test_preprocessed = preprocess_anom.transform(anom_test)
-    anom_test_preprocessed = pd.DataFrame(anom_test_preprocessed, columns=anom_test.columns)
+    anom_test_preprocessed = clf_X_test_preprocessed.copy()
 
     # Export Preprocessed Data
     preprocessing_dir = BASE_DIR / 'preprocessing'
@@ -82,11 +73,13 @@ def preprocess_data() -> None:
     anom_train_preprocessed.to_csv(preprocessing_dir / 'anom_train_preprocessed.csv', index=False)
     anom_test_preprocessed.to_csv(preprocessing_dir / 'anom_test_preprocessed.csv', index=False)
 
+    ## save test_df index untuk evaluasi pelatihan model anomali detection
+    test_df[['Potability']].reset_index(drop=True).to_csv(preprocessing_dir / 'anom_test_indices.csv', index=False) 
+
     # Export Preprocessing Pipelines
     artifacts_dir = BASE_DIR / 'artifacts'
     os.makedirs(artifacts_dir, exist_ok=True)
-    dump(preprocess_clf, artifacts_dir / 'preprocessing_pipeline_clf.pkl')
-    dump(preprocess_anom, artifacts_dir / 'preprocessing_pipeline_anom.pkl')
+    dump(preprocess_pipeline, artifacts_dir / 'preprocessing_pipeline.pkl')
 
     # End
     logging.info("Preprocessing selesai dan data telah disimpan.")
