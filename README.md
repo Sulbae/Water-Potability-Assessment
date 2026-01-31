@@ -199,7 +199,7 @@ $$
 $$
 
 ##### **Hasil Evaluasi**
-Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan _threshold_ probabilitas prediksi sebesar **0.69** sehingga model akan lebih ketat dalam mengkategorikan air yang tidak layak.
+Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan **_threshold_ probabilitas** prediksi sebesar **0.69** sehingga model akan lebih ketat dalam mengkategorikan air yang tidak layak.
 
 1) Classification Report
 
@@ -254,7 +254,7 @@ Kekurangan
    - Meningkatkan generalisasi.
 
 #### **Training**
-Pelatihan model dilakukan menggunakan data Train tanpa label (anom_train = clf_X_train), namun diketahui sebelumnya telah difilter hanya data non-potable. Hal ini bertujuan untuk mendeteksi anomali pada prediksi non-potable yang sangat ketat akibat threshold yang cukup tinggi pada model klasifikasi.
+Pelatihan model dilakukan menggunakan data Train tanpa label (anom_train = clf_X_train), namun diketahui sebelumnya telah difilter **hanya data non-potable**. Hal ini bertujuan untuk mendeteksi anomali pada prediksi non-potable yang sangat ketat akibat threshold yang cukup tinggi pada model klasifikasi.
 
 Konfigurasi Parameter:
 - n_estimators = **100**
@@ -265,38 +265,38 @@ Konfigurasi Parameter:
 1) Anomali Rate & Score
 
 ![anomali-score-distribution](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/model%20evaluation/distribusi%20skor%20anomali.png)
-* Setelah diuji terhadap data Test, diketahui model memiliki Anomaly Rate sebesar 6,25%.
-* Kemudian, berdasarkan histogram terlihat bahwa distribusi melebar ⟶ model dapat membedakan data normal vs anomali.
+* Setelah diuji terhadap data Test, diketahui model memiliki **Anomaly Rate sebesar 6,25%**.
+* Kemudian, berdasarkan histogram terlihat bahwa **distribusi melebar** ⟶ model dapat membedakan data normal vs anomali.
 
 2) Confusion matrix
 
 ![confusion-matrix-deteksi-anomali](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/model%20evaluation/confusion%20matrix%20anomali%20detection.png)
 
-* Dari 400 sampel air tidak layak, sebanyak 22 sampel terdeteksi memiliki distribusi data parameter yang tidak wajar.
-* Dari 256 sampel air layak, sebanyak 19 sampel terdeteksi memiliki distribusi data parameter yang tidak wajar.
+* Dari **400 sampel air tidak layak**, sebanyak **22 sampel** terdeteksi memiliki distribusi data parameter yang **tidak wajar**.
+* Dari **256 sampel air layak**, sebanyak **19 sampel** terdeteksi memiliki distribusi data parameter yang **tidak wajar**.
 
 ## **Inference**
 
 ![inferenc-platform](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/inference/inference_streamlit_1.png)
 
-Streamlit UI digunakan sebagai platform penerima input data dalam bentuk formulir yang dapat diisi secara manual.
+**Streamlit UI** digunakan sebagai platform penerima input data dalam bentuk formulir yang dapat diisi secara manual.
 App: [Coba App](https://water-potability-assessment.streamlit.app/)
 
 ## **Conclusion**
 _**Water Potability Risk Assessment System**_ berhasil mengimplementasikan pendekatan machine learning dengan kombinasi antara supervised classification dan semi-supervised anomaly detection. Dan mampu memberikan hasil analisis risk level serta rekomendasi berdasarkan data masukkan (input) melalui formulir yang dibuat menggunakan streamlit UI.
 
 * Catatan:
-  - Sistem Risk Assessment yang telah dikembangkan tidak berperan sebagai pengganti uji analisis laboratorium, melainkan sebagai alat bantu (tools) untuk mempermudah analisis lanjutan.
-  - Input manual pada streamlit UI sering kali berbeda dengan distribusi data pada pelatihan model, sehingga lebih mudah terdeteksi sebagai anomali.
+  - **Sistem Risk Assessment** yang telah dikembangkan tidak berperan sebagai pengganti uji analisis laboratorium, melainkan sebagai **alat bantu (_tools_)** untuk mempermudah analisis lanjutan.
+  - **Input manual** pada streamlit UI munkgin berbeda dengan distribusi data pada pelatihan model, sehingga lebih mudah terdeteksi sebagai anomali.
 
 ## **Project Evaluation & Future Improvement**
 - Kalibrasi Threshold
-  * Threshold potabilitas saat ini masih bersifat statis sehingga perlu dipantau secara berkala.
-  * Pengembangan selanjutnya dapat dipertimbangkan implementasi threshold yang lebih adaptif dan disesuaikan dengan regulasi resmi.
+  * Threshold potabilitas saat ini masih **bersifat statis** sehingga perlu dipantau secara berkala.
+  * Pengembangan selanjutnya dapat dipertimbangkan **implementasi threshold yang lebih adaptif** dan disesuaikan dengan regulasi resmi.
 
 - Analisis Penyebab Anomali
-  * Saat ini output analisis hanya menampilkan risk level & rekomendasi.
-  * Analisis dapat dikembangkan lebih detail seperti analisis parameter penyebab anomali. 
+  * Saat ini output analisis hanya menampilkan **risk level & rekomendasi**.
+  * Analisis dapat dikembangkan lebih detail seperti **analisis parameter penyebab anomali**. 
 
 ## **References**
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
