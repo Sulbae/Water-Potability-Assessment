@@ -181,7 +181,7 @@ $$
 
 Keterangan:
 - TP = True Positive - positif dan diprediksi positif
-- FP = False Negative - positif tapi diprediksi negatif
+- FN = False Negative - positif tapi diprediksi negatif
 
 c) F1-Score: 
    - Metrik yang menggabungkan precision dan recall. 
