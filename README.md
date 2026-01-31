@@ -64,9 +64,11 @@ Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini 
 
 Berdasarkan hasil temuan dari eksplorasi data, maka dilakukan Preprocessing Data dengan tahapan:
 1) Imputasi
+
    Imputasi dilakukan dengan memberikan nilai baru sebagai pengganti nilai null / data yang hilang. Dengan mempertimbangkan jumlah `null` yang cukup banyak, maka nilai yang digunakan untuk imputasi adalah nilai median. Median dipilih karena sifatnya yang netral sehingga tidak berpengaruh signifikan terhadap distribusi data.
    
 3) Scaling
+
    Standarisasi nilai skala dilakukan untuk menyeragamkan rentang data seluruh parameter sehingga data memiliki rentang yang tidak terlalu berbeda signifikan. Hal ini dilakukan untuk mencegah bias dari pelatihan model deteksi anomali karena model deteksi anomali sangat sensitif terhadap nilai yang berbeda signifikan. 
 
 ## Pengembangan Model
