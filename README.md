@@ -90,10 +90,9 @@ IsolationForest()
 ..classification report
 ..confusion matrix
 
-## Realisasi
-### Deployment
+## Inference
 
-### Inference
+App: ![Coba App](https://water-potability-assessment.streamlit.app/)
 
 ## Referensi
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
