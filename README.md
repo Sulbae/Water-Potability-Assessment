@@ -73,9 +73,7 @@ Berdasarkan hasil temuan dari eksplorasi data, maka dilakukan Preprocessing Data
 
    `StandardScaler` dipilih sebagai scaler karena distribusi seluruh data parameter kualitas air sudah normal/mendekati normal. scaler ini bekerja dengan melakukan transformasi nilai data agar memiliki rata-rata **(_mean_) = 0** dan **simpangan baku (_standar deviasi_) = 1**. Secara matematis, setiap nilai fitur ditransformasikan seperti berikut:
 
-\[
-x_{scaled} = \frac{x - \mu}{\sigma}
-\]
+\( x_{scaled} = \frac{x - \mu}{\sigma} \)
    
 Keterangan:
 - μ = mean (nilai rata-rata) fitur 
