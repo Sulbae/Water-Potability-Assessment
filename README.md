@@ -1,5 +1,31 @@
 # Water-Potability-Assessment
 ![safe-water-filtration](https://github.com/Sulbae/Water-Potability-Assessment/blob/main/assets/banner/safe-water-filtration%202.jpg)
+
+---
+## List of Contents
+  - [Background](#Background)
+  - [Objective](#Objective)
+  - [Scpoe](#Scope)
+  - [Dataset Overview](#Dataset-Overview)
+  - [Data Preparation](#Data-Preparation)
+    - [Data Assessment](#Data-Assessment)
+    - [Data Cleaning](#Data-Cleaning)
+    - [Column Description](#Column-Description)
+    - [Explore](#Explore)
+  - [Data Preparation](#Data-Preparation#)
+    - [Features Engineering](#Feature-Engineering)
+    - [Data Normalization](#Data-Normalization)
+    - [Data Exploration](#Data-Exploration)
+    - [Data Preprocessing](#Data-Preprocessing)
+  - [Model Development](#Model-Development)
+    - [1) Classifier Model](#1\)Classifier-Model)
+    - [2) Anomali Detection Model](#2\)Anomali-Detection-Model)
+  - [Inference](#Inference)
+  - [Conclusion](#Conclusion)
+  - [Project Evaluation & Future Improvement](#Project-Evaluation-&-Future-Improvement)
+  - [References](#References)
+
+---
 ## Background
    Berdasarkan survei Badan Pusat Statistik (BPS) tahun 2024, 9 dari 10 rumah tangga di Indonesia memiliki akses air minum yang layak. Namun, hanya 11,9% yang memiliki akses air minum yang benar-benar aman sesuai standar kesehatan. Survei kualitas air rumah tangga menunjukkan bahwa persentase sampel air minum yang terkontaminasi bakteri seperti E. coli bisa mencapai sekitar 70%, yang menunjukkan potensi risiko kesehatan tinggi [1]. Kontaminasi mikroorganisme patogen seperti ini maupun senyawa berbahaya lain yang terkandung dalam air merupakan ancaman nyata terhadap keamanan para konsumen. Jika kondisi ini terus berlanjut dan tak kunjung membaik, maka kebutuhan air bersih layak minum akan menjadi tantangan nyata bagi masyarakat. Oleh karena itu, pemerintah melalui Peraturan Presiden Republik Indonesia Nomor 12 Tahun 2025 tentang Rencana Pembangunan Jangka Menengah Nasional (RPJMN) 2025-2029 telah membuat beberapa target untuk memastikan ketersediaan air bersih untuk penduduk Indonesia. Salah satu targetnya yaitu meningkatkan akses rumah tangga perkotaan terhadap air siap minum perpipaan hingga 51,36% [2].
    
@@ -81,7 +107,7 @@ Keterangan:
 - μ = mean (nilai rata-rata) fitur 
 - σ = standar deviasi fitur 
 
-## Pengembangan Model
+## Model Development
 ### 1) Classifier Model
 #### Algorithm
 `RandomForestClassifier()` merupakan algoritma yang bekerja dengan menggabungkan banyak pohon keputusan (_decision tree_) yang akan menentukan hasil klasifikasi berdasarkan suara terbanyak.
@@ -242,7 +268,7 @@ Water Potability Risk Assessment System berhasil mengimplementasikan pendekatan 
   * Saat ini output analisis hanya menampilkan risk level & rekomendasi.
   * Analisis dapat dikembangkan lebih detail seperti analisis parameter penyebab anomali. 
 
-## Referensi
+## References
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
 
 [2] Alfathi, B. R. 50% Penduduk Indonesia Diprediksi Kekurangan Air Bersih pada 2050. Artikel Lingkungan, GoodStats. (2025). https://data.goodstats.id/statistic/50-penduduk-indonesia-diprediksi-kekurangan-air-bersih-pada-2050-nNSet
