@@ -62,6 +62,13 @@ Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini 
 #### Preprocessing Pipeline
 ![preprocessing-pipeline](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/workflow/preprocessing_pipeline.png)
 
+Berdasarkan hasil temuan dari eksplorasi data, maka dilakukan Preprocessing Data dengan tahapan:
+1) Imputasi
+   Imputasi dilakukan dengan memberikan nilai baru sebagai pengganti nilai null / data yang hilang. Dengan mempertimbangkan jumlah `null` yang cukup banyak, maka nilai yang digunakan untuk imputasi adalah nilai median. Median dipilih karena sifatnya yang netral sehingga tidak berpengaruh signifikan terhadap distribusi data.
+   
+3) Scaling
+   Standarisasi nilai skala dilakukan untuk menyeragamkan rentang data seluruh parameter sehingga data memiliki rentang yang tidak terlalu berbeda signifikan. Hal ini dilakukan untuk mencegah bias dari pelatihan model deteksi anomali karena model deteksi anomali sangat sensitif terhadap nilai yang berbeda signifikan. 
+
 ## Pengembangan Model
 ### 1) Classifier Model
 #### Algorithm
@@ -79,8 +86,38 @@ Kekurangan:
 * Kurang cocok untuk kebutuhan analisis real-time dengan latensi rendah.
 * Jika terlalu kompleks, ukuran model besar dan boros memori.
 
+#### Parameter
+1) n_estimator
+   - Jumlah pohon keputusan (decision tree) yang dibangun dalam Random Forest.
+   - Semakin banyak, prediksi lebih akurat & stabil.
+   - Jika terlalu banyak, waktu pelatihan & inferensi semakin lama.
+2) max_depth
+   - Kedalaman (jumlah anak cabang) maksimum  setiap pohon keputusan yang dapat mengontrol kompleksitas model.
+   - Nilai besar, model akan sangat detail. Ada, risiko overfitting.
+   - Nilai kecil, model terlalu sederhana. Ada risiko underfitting.
+3) min_samples_leaf
+   - Jumlah minimum data dalam satu daun (leaf) pohon.
+   - Semakin besar, model semakin smooth & stabil.
+   - Dapat mengurangi efek noise dan outlier.
+4) min_samples_split
+   - Jumlah minimum data yang diperlukan agar suatu node bisa dipecah (split).
+   - Nilai besar, pohon lebih sederhana.
+   - Nilai kecil, pohon lebih detail.
+
 #### Training
-..hyperparameter tuning
+Pelatihan dilakukan menggunakan `GridSearch()` sehingga dapat melakukan hyperparameter tuning sekaligus dan menghasilkan _best_model_ dengan _best_parameter_. Metrik skor yang digunakan yaitu precision, recall, dan F1-score.
+
+Konfigurasi Parameter:
+`N_ESTIMATORS_RANGE = np.linspace(10, 100, 3, dtype=int)`
+`MAX_DEPTH_RANGE = np.linspace(1, 50, 3, dtype=int)`
+`MIN_SAMPLES_LEAF = np.linspace(1, 10, 3, dtype=int)`
+`MIN_SAMPLES_SPLIT = np.linspace(2, 10, 3, dtype=int)`
+
+Best Parameter:
+- n_estimators = 100
+- max_depth = 50
+- min_samples_leaf = 1
+- min_samples_split = 2
 
 #### Evaluation
 ##### Metrik Evaluasi
@@ -128,8 +165,33 @@ Kekurangan
 * Sensitif terhadap parameter contamination
 * Tidak cocok sebagai classifier, hanya sebagai pelengkap
 
+#### Parameter
+1) n_estimator
+   - Jumlah isolation tree yang dibangun dalam Isolation Forest.
+   - Semakin banyak, maka skor anomali lebih stabil.
+   - Jika terlalu sedikit, hasil akan kurang stabil (fluktuatif).
+   - Jika terlalu banyak, waktu pelatihan & inferensi semakin lama.
+2) max_samples
+   - Jumlah atau proporsi sampel data yang digunakan untuk membangun setiap pohon (tree).
+   - Nilai besar, pola global lebih terlihat.
+   - Nilai kecil, fokus ke pola lokal.
+3) contamination
+   - Perkiraan proporsi data yang dianggap anomali.
+   - Menentukan threshold pemisahan data normal vs anomali.
+   - Disesuaikan dengan kebutuhan analisis.
+4) max_features
+   - Jumlah fitur yang dipilih secara acak untuk setiap tree.
+   - Dapat meningkatkan variasi antar tree.
+   - Mencegah satu fitur dominan.
+   - Meningkatkan generalisasi.
+
 #### Training
-...parameter
+Pelatihan model dilakukan menggunakan data Train tanpa label (anom_train = clf_X_train), namun diketahui sebelumnya telah difilter hanya data non-potable. Hal ini bertujuan untuk mendeteksi anomali pada prediksi non-potable yang sangat ketat akibat threshold yang cukup tinggi pada model klasifikasi.
+
+Konfigurasi Parameter:
+- n_estimators = 100
+- max_samples = 'auto'
+- contamination = 0,05
 
 #### Evaluation
 1) Anomali Rate & Score
