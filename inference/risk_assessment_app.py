@@ -15,8 +15,8 @@ THRESHOLD_POTABILITY = 0.69
 def load_artifacts():
     try:
         preprocess = load("artifacts/preprocessing_pipeline.pkl")
-        clf_model  = load("artifacts/best_classifier.pkl")
-        anom_model = load("artifacts/best_anomaly_model.pkl")
+        clf_model  = load("artifacts/rf_classifier_model.pkl")
+        anom_model = load("artifacts/anomaly_detection_model.pkl")
         return preprocess, clf_model, anom_model
     except Exception as e:
         st.error(f"Gagal memuat model: {e}")
