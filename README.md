@@ -45,11 +45,18 @@ Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini 
 #### 1) Cek Distribusi Data
    ![histogram-distribusi-data](https://github.com/Sulbae/Water-Potability-Assessment/blob/708e8b6e1cb1403bfcd9e2c81d2ae869b7c9da90/assets/EDA/Distribusi%20Data%20Fitur.png)
 
+   * Data setiap parameter terdistribusi normal, kecuali parameter Solids yang sedikit condong ke kiri / positive skewed (Mean > Median dan nilai max = 3x Median)
+   * Berdasarkan kelas targetnya, ternyata proporsi dataset diketahui tidak seimbang (imbalance). Untuk mengatasi ini, maka perlu penerapan weight balance pada proses pelatihan.
+
 #### 2) Cek Outlier
    ![boxplot-outlier](https://github.com/Sulbae/Water-Potability-Assessment/blob/c6bf27c09814fc2e0b5e308ef1b01dd6a54a933b/assets/EDA/Outlier.png)
+
+   * Terdapat outlier pada semua parameter. Hal ini dapat dinilai wajar terjadi apabila mempertimbangkan kejadian fluktuasi kualitas air akibat berbagai faktor lingkungan. Informasi outlier akan berguna untuk pengembangan model deteksi anomali.
    
 #### 3) Cek Korelasi
    ![heatmap-korelasi](https://github.com/Sulbae/Water-Potability-Assessment/blob/c6bf27c09814fc2e0b5e308ef1b01dd6a54a933b/assets/EDA/heatmap%20korelasi.png)
+
+   * Semua nilai korelasi terhadap Potability sangat kecil (mendekati 0). Artinya, korelasi linear sangat lemah. Potabilitas ditentukan melalui kombinasi multi-variabel. Dengan demikian, model linear tidak cocok untuk data ini.
    
 ### Data Preprocessing
 #### Preprocessing Pipeline
@@ -58,17 +65,15 @@ Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini 
 ## Pengembangan Model
 ### 1) Classifier Model
 #### Algorithm
-RandomForestClassifier()
-..jelaskan konsep kerja
-Gabungan banyak pohon keputusan (decision tree) yang akan menentukan hasil klasifikasi berdasarkan suara terbanyak.
+`RandomForestClassifier()` merupakan algoritma yang bekerja dengan menggabungkan banyak pohon keputusan (_decision tree_) yang akan menentukan hasil klasifikasi berdasarkan suara terbanyak.
 
-..kelebihan
+Kelebihan:
 * Akurasi & Stabilitas tinggi
 * Mampu menangkap hubungan non-linear
 * Tidak sensitif terhadap perbedaan skala fitur
 * Relatif tahan terhadap outlier
 
-..kekurangan
+Kekurangan:
 * Model cenderung sulit diinterpretasikan secara detail.
 * Waktu training dan inferensi lebih lambat dibanding model sederhana.
 * Kurang cocok untuk kebutuhan analisis real-time dengan latensi rendah.
@@ -78,7 +83,7 @@ Gabungan banyak pohon keputusan (decision tree) yang akan menentukan hasil klasi
 ..hyperparameter tuning
 
 #### Evaluation
-..metrik evaluasi
+##### Metrik Evaluasi
 * Precision: Tingkat ketepatan prediksi positif yang dibuat model.
 
 * Recall: Tingkat keberhasilan model dalam mendeteksi seluruh data positif yang sebenarnya.
@@ -86,27 +91,28 @@ Gabungan banyak pohon keputusan (decision tree) yang akan menentukan hasil klasi
 * F1-Score: 
    - Metrik yang menggabungkan precision dan recall. 
    - Digunakan ketika ingin keduanya memiliki bobot yang seimbang.
-..hasil evaluasi
-..classification report
+
+##### Hasil Evaluasi
+Classification Report
 ![classification-report](https://github.com/Sulbae/Water-Potability-Assessment/blob/a688f27c024d4cac6c3b565ab8b2169274eccd07/assets/model%20evaluation/classification%20report.png)
 
-..confusion matrix
+
+Confusion Matrix
 ![confusion-matrix-klasifikasi](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/model%20evaluation/confusion%20matrix%20classifier%20th-0.69.png)
 * Menetapkan threshold klasifikasi = 0.69, sehingga model dapat bekerja lebih ketat dan tidak meloloskan air tidak layak dengan mudah. Hal ini dilakukan untuk menjamin keamanan/kesehatan pengguna.
 
 ### 2) Anomali Detection Model
 #### Algorithm
-IsolationForest()
-..jelaskan konsep kerja
-Algoritma ini dapat mendeteksi data tidak normal dengan cara mengisolasi data tersebut. Data anomali lebih mudah dipisahkan daripada data normal sehingga data yang cepat terisolasi dapat dianggap anomali.
+`IsolationForest()` merupakan algoritma yang dapat mendeteksi data tidak normal dengan cara mengisolasi data tersebut. Data anomali lebih mudah dipisahkan daripada data normal sehingga data yang cepat terisolasi dapat dianggap anomali.
 
-..kelebihan
+
+Kelebihan
 * Tidak perlu data anomali berlabel
 * Skalabel untuk dataset besar
 * Relatif tahan terhadap noise
 * Tidak bergantung pada distribusi data
 
-..kekurangan
+Kekurangan
 * Perlu post-analysis (penjelasan mengapa anomali terjadi)
 * Sensitif terhadap parameter contamination
 * Tidak cocok sebagai classifier, hanya sebagai pelengkap
@@ -115,10 +121,10 @@ Algoritma ini dapat mendeteksi data tidak normal dengan cara mengisolasi data te
 ...parameter
 
 #### Evaluation
-..anomali rate & score
+Anomali rate & score
 ![anomali-score-distribution](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/model%20evaluation/distribusi%20skor%20anomali.png)
 
-..confusion matrix
+Confusion matrix
 ![confusion-matrix-deteksi-anomali](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/model%20evaluation/confusion%20matrix%20anomali%20detection.png)
 
 * Dari 400 sampel air tidak layak, sebanyak 22 sampel terdeteksi memiliki distribusi data parameter yang tidak wajar.
