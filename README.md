@@ -152,20 +152,52 @@ Konfigurasi Parameter:
 `MIN_SAMPLES_SPLIT = np.linspace(2, 10, 3, dtype=int)`
 
 Best Parameter:
-- n_estimators = 100
-- max_depth = 50
-- min_samples_leaf = 1
-- min_samples_split = 2
+- n_estimators = **100**
+- max_depth = **50**
+- min_samples_leaf = **1**
+- min_samples_split = **2**
 
 #### Evaluation
 ##### Metrik Evaluasi
-* Precision: Tingkat ketepatan prediksi positif yang dibuat model.
+a) Precision: Tingkat ketepatan prediksi positif yang dibuat model.
 
-* Recall: Tingkat keberhasilan model dalam mendeteksi seluruh data positif yang sebenarnya.
+Formula matematis:
 
-* F1-Score: 
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+Keterangan:
+- TP = True Positive - positif dan diprediksi positif
+- FP = False Positive - negatif tapi diprediksi positif
+
+b) Recall: Tingkat keberhasilan/kemampuan model dalam mendeteksi seluruh data positif yang sebenarnya.
+
+Formula matematis:
+
+$$
+\text{Precision} = \frac{TP}{TP + FN}
+$$
+
+Keterangan:
+- TP = True Positive - positif dan diprediksi positif
+- FP = False Negative - positif tapi diprediksi negatif
+
+c) F1-Score: 
    - Metrik yang menggabungkan precision dan recall. 
    - Digunakan ketika ingin keduanya memiliki bobot yang seimbang.
+
+Formula matematis:
+
+$$
+\text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+$$
+
+atau
+
+$$
+\text{F1-score} = \frac{2TP}{2TP + FP + FN}
+$$
 
 ##### Hasil Evaluasi
 Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan _threshold_ probabilitas prediksi sebesar **0.69** sehingga model akan lebih ketat dalam mengkategorikan air yang tidak layak.
@@ -175,12 +207,12 @@ Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan _threshold_
 ![classification-report](https://github.com/Sulbae/Water-Potability-Assessment/blob/a688f27c024d4cac6c3b565ab8b2169274eccd07/assets/model%20evaluation/classification%20report.png)
 
 * Precision
-  - Dari semua sampel yang diprediksi tidak layak, 62% memang benar tidak layak.
+  - Dari semua sampel yang diprediksi tidak layak, **62%** memang benar tidak layak.
   - Semua sampel yang diprediksi layak memang benar layak.
 
 * Recall
-  - Dari semua air yang sebenarnya tidak layak, 100% berhasil terdeteksi.
-  - Dari semua sampel yang sebenarnya layak, hanya 5% yang berhasil dikenali.
+  - Dari semua air yang sebenarnya tidak layak, **100%** berhasil terdeteksi.
+  - Dari semua sampel yang sebenarnya layak, hanya **5%** yang berhasil dikenali.
 
 2) Confusion Matrix
 
@@ -227,9 +259,9 @@ Kekurangan
 Pelatihan model dilakukan menggunakan data Train tanpa label (anom_train = clf_X_train), namun diketahui sebelumnya telah difilter hanya data non-potable. Hal ini bertujuan untuk mendeteksi anomali pada prediksi non-potable yang sangat ketat akibat threshold yang cukup tinggi pada model klasifikasi.
 
 Konfigurasi Parameter:
-- n_estimators = 100
-- max_samples = 'auto'
-- contamination = 0,05
+- n_estimators = **100**
+- max_samples = **'auto'**
+- contamination = **0,05**
 
 #### Evaluation
 1) Anomali Rate & Score
@@ -253,7 +285,7 @@ Streamlit UI digunakan sebagai platform penerima input data dalam bentuk formuli
 App: [Coba App](https://water-potability-assessment.streamlit.app/)
 
 ## Conclusion
-Water Potability Risk Assessment System berhasil mengimplementasikan pendekatan machine learning dengan kombinasi antara supervised classification dan semi-supervised anomaly detection. Dan mampu memberikan hasil analisis risk level serta rekomendasi berdasarkan data masukkan (input) melalui formulir yang dibuat menggunakan streamlit UI.
+_**Water Potability Risk Assessment System**_ berhasil mengimplementasikan pendekatan machine learning dengan kombinasi antara supervised classification dan semi-supervised anomaly detection. Dan mampu memberikan hasil analisis risk level serta rekomendasi berdasarkan data masukkan (input) melalui formulir yang dibuat menggunakan streamlit UI.
 
 * Catatan:
   - Sistem Risk Assessment yang telah dikembangkan tidak berperan sebagai pengganti uji analisis laboratorium, melainkan sebagai alat bantu (tools) untuk mempermudah analisis lanjutan.
