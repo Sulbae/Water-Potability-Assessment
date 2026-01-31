@@ -117,15 +117,14 @@ if st.button("Prediksi Kelayakan Air", type="primary"):
     try:
         result = run_inferece(data_input)
 
-        st.write("Hasil Analisis")
+        st.write("### Hasil")
 
         # Risk Level
-        st.subheader("Risk Level dan Rekomendasi")
+        st.subheader("Risk Level dan Rekomendasi:")
 
         risk_label = result["risk_label"]
         recommendation = result["recommendation"]
 
-        st.write("### Hasil Prediksi:")
         st.write(f"**Risk Label:** {risk_label}")
         st.write(f"**Rekomendasi:** {recommendation}")
 
