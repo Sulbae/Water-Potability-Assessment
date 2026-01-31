@@ -1,8 +1,8 @@
-# Water-Potability-Assessment
+# **Water-Potability-Assessment**
 ![safe-water-filtration](https://github.com/Sulbae/Water-Potability-Assessment/blob/main/assets/banner/safe-water-filtration%202.jpg)
 
 ---
-## List of Contents
+## **List of Contents**
   - [Background](#Background)
   - [Objective](#Objective)
   - [Scpoe](#Scope)
@@ -26,7 +26,7 @@
   - [References](#References)
 
 ---
-## Background
+## **Background**
    Berdasarkan survei Badan Pusat Statistik (BPS) tahun 2024, 9 dari 10 rumah tangga di Indonesia memiliki akses air minum yang layak. Namun, hanya 11,9% yang memiliki akses air minum yang benar-benar aman sesuai standar kesehatan. Survei kualitas air rumah tangga menunjukkan bahwa persentase sampel air minum yang terkontaminasi bakteri seperti E. coli bisa mencapai sekitar 70%, yang menunjukkan potensi risiko kesehatan tinggi [1]. Kontaminasi mikroorganisme patogen seperti ini maupun senyawa berbahaya lain yang terkandung dalam air merupakan ancaman nyata terhadap keamanan para konsumen. Jika kondisi ini terus berlanjut dan tak kunjung membaik, maka kebutuhan air bersih layak minum akan menjadi tantangan nyata bagi masyarakat. Oleh karena itu, pemerintah melalui Peraturan Presiden Republik Indonesia Nomor 12 Tahun 2025 tentang Rencana Pembangunan Jangka Menengah Nasional (RPJMN) 2025-2029 telah membuat beberapa target untuk memastikan ketersediaan air bersih untuk penduduk Indonesia. Salah satu targetnya yaitu meningkatkan akses rumah tangga perkotaan terhadap air siap minum perpipaan hingga 51,36% [2].
    
    Sejalan dengan itu, ADEM Indonesia (perusahaan fiktif), sebagai sebuah perusahaan layanan penyediaan air minum (SPAM) akan memiliki peran serta dalam merealisasikan program tersebut. Dengan demikian, perushaan memiliki tanggung jawab untuk memastikan bahwa air yang didistribusikan kepada masyarakat telah memenuhi standar kualitas, keamanan, dan kesehatan secara konsisten, akurat, dan berkelanjutan. Penggunaan sumber air baku yang berasal dari sungai, waduk, danau, dan air tanah, tentu memiliki tingkat kontaminasi yang berbeda-beda, baik secara fisik, kimia, maupun biologis. Hal ini menjadi tantangan yang paling sering dihadapi dalam operasional pengolahan air. Ditambah lagi perubahan musim, limpasan limbah domestik, aktivitas industri, dan degradasi kualitas lingkungan memperbesar risiko fluktuasi kualitas air.
@@ -42,7 +42,7 @@ Pengembangan tahap awal, yaitu:
    1) membuat model **klasifikasi potabilitas air**,
    2) membuat model **deteksi anomali kualitas air**.
 
-## Dataset Overview
+## **Dataset Overview**
 Dataset yang digunakan adalah water_potability.csv (dataset publik yang tersedia di platform Kaggle) yang berisi data metrik kualitas air dari 3276 badan air yang berbeda. Fitur-fitur yang tersedia dalam dataset ditampilkan pada Tabel 1.
 | No | Nama | Tipe Data | Deskripsi |
 |----|------|-----------|-----------|
@@ -59,15 +59,15 @@ Dataset yang digunakan adalah water_potability.csv (dataset publik yang tersedia
 
 Sumber: [Lihat](https://www.kaggle.com/datasets/adityakadiwal/water-potability)
 
-## Data Preparation
-### Data Assessment
+## **Data Preparation**
+### **Data Assessment**
 Dari total 3276 baris data, ditemukan sebanyak **1434** nilai null/missing value pada dataset. Sementara itu, hasil pemeriksaan menunjukkan tidak ada duplikasi data pada dataset.
 
-### Data Cleaning
-#### Missing Value Handling
+### **Data Cleaning**
+#### **Missing Value Handling**
 Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini data parameter kualitas air) yaitu pH (491 null), Sulfate (781 null), dan Trihalomethanes (162 null). Untuk mengatasi kekosongan data ini, maka dilakukan imputasi data menggunakan nilai median untuk menjaga struktur distribusi data. 
 
-### Data Exploration
+### **Data Exploration**
 #### 1) Cek Distribusi Data
    ![histogram-distribusi-data](https://github.com/Sulbae/Water-Potability-Assessment/blob/708e8b6e1cb1403bfcd9e2c81d2ae869b7c9da90/assets/EDA/Distribusi%20Data%20Fitur.png)
 
@@ -84,7 +84,7 @@ Nilai null/minssing value pada dataset ditemukan pada 3 variabel (dalam hal ini 
 
    * Semua nilai korelasi terhadap Potability sangat kecil (mendekati 0). Artinya, korelasi linear sangat lemah. Potabilitas ditentukan melalui kombinasi multi-variabel. Dengan demikian, model linear tidak cocok untuk data ini.
    
-### Data Preprocessing
+### **Data Preprocessing**
 #### Preprocessing Pipeline
 ![preprocessing-pipeline](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/workflow/preprocessing_pipeline.png)
 
@@ -107,9 +107,9 @@ Keterangan:
 - μ = mean (nilai rata-rata) fitur 
 - σ = standar deviasi fitur 
 
-## Model Development
-### Classifier Model
-#### Algorithm
+## **Model Development**
+### **Classifier Model**
+#### **Algorithm**
 `RandomForestClassifier()` merupakan algoritma yang bekerja dengan menggabungkan banyak pohon keputusan (_decision tree_) yang akan menentukan hasil klasifikasi berdasarkan suara terbanyak.
 
 Kelebihan:
@@ -142,7 +142,7 @@ Kekurangan:
    - Nilai besar, pohon lebih sederhana.
    - Nilai kecil, pohon lebih detail.
 
-#### Training
+#### **Training**
 Pelatihan dilakukan menggunakan `GridSearch()` sehingga dapat melakukan hyperparameter tuning sekaligus dan menghasilkan _best_model_ dengan _best_parameter_. Metrik skor yang digunakan yaitu precision, recall, dan F1-score.
 
 Konfigurasi Parameter:
@@ -157,8 +157,8 @@ Best Parameter:
 - min_samples_leaf = **1**
 - min_samples_split = **2**
 
-#### Evaluation
-##### Metrik Evaluasi
+#### **Evaluation**
+##### **Metrik Evaluasi**
 a) Precision: Tingkat ketepatan prediksi positif yang dibuat model.
 
 Formula matematis:
@@ -199,7 +199,7 @@ $$
 \text{F1-score} = \frac{2TP}{2TP + FP + FN}
 $$
 
-##### Hasil Evaluasi
+##### **Hasil Evaluasi**
 Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan _threshold_ probabilitas prediksi sebesar **0.69** sehingga model akan lebih ketat dalam mengkategorikan air yang tidak layak.
 
 1) Classification Report
@@ -219,10 +219,9 @@ Dalam pengembangan model klasifikasi Potabilitas Air ini, ditetapkan _threshold_
 ![confusion-matrix-klasifikasi](https://github.com/Sulbae/Water-Potability-Assessment/blob/b71b4c59d13bb7115507a260949fb846bdf4147f/assets/model%20evaluation/confusion%20matrix%20classifier%20th-0.69.png)
 * Menetapkan threshold klasifikasi = 0.69, sehingga model dapat bekerja lebih ketat dan tidak meloloskan air tidak layak dengan mudah. Hal ini dilakukan untuk menjamin keamanan/kesehatan pengguna.
 
-### Anomaly Detection Model
-#### Algorithm
+### **Anomaly Detection Model**
+#### **Algorithm**
 `IsolationForest()` merupakan algoritma yang dapat mendeteksi data tidak normal dengan cara mengisolasi data tersebut. Data anomali lebih mudah dipisahkan daripada data normal sehingga data yang cepat terisolasi dapat dianggap anomali.
-
 
 Kelebihan
 * Tidak perlu data anomali berlabel
@@ -235,7 +234,7 @@ Kekurangan
 * Sensitif terhadap parameter contamination
 * Tidak cocok sebagai classifier, hanya sebagai pelengkap
 
-#### Parameter
+#### **Parameter**
 1) n_estimator
    - Jumlah isolation tree yang dibangun dalam Isolation Forest.
    - Semakin banyak, maka skor anomali lebih stabil.
@@ -255,7 +254,7 @@ Kekurangan
    - Mencegah satu fitur dominan.
    - Meningkatkan generalisasi.
 
-#### Training
+#### **Training**
 Pelatihan model dilakukan menggunakan data Train tanpa label (anom_train = clf_X_train), namun diketahui sebelumnya telah difilter hanya data non-potable. Hal ini bertujuan untuk mendeteksi anomali pada prediksi non-potable yang sangat ketat akibat threshold yang cukup tinggi pada model klasifikasi.
 
 Konfigurasi Parameter:
@@ -263,7 +262,7 @@ Konfigurasi Parameter:
 - max_samples = **'auto'**
 - contamination = **0,05**
 
-#### Evaluation
+#### **Evaluation**
 1) Anomali Rate & Score
 
 ![anomali-score-distribution](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/model%20evaluation/distribusi%20skor%20anomali.png)
@@ -277,21 +276,21 @@ Konfigurasi Parameter:
 * Dari 400 sampel air tidak layak, sebanyak 22 sampel terdeteksi memiliki distribusi data parameter yang tidak wajar.
 * Dari 256 sampel air layak, sebanyak 19 sampel terdeteksi memiliki distribusi data parameter yang tidak wajar.
 
-## Inference
+## **Inference**
 
 ![inferenc-platform](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/inference/inference_streamlit_1.png)
 
 Streamlit UI digunakan sebagai platform penerima input data dalam bentuk formulir yang dapat diisi secara manual.
 App: [Coba App](https://water-potability-assessment.streamlit.app/)
 
-## Conclusion
+## **Conclusion**
 _**Water Potability Risk Assessment System**_ berhasil mengimplementasikan pendekatan machine learning dengan kombinasi antara supervised classification dan semi-supervised anomaly detection. Dan mampu memberikan hasil analisis risk level serta rekomendasi berdasarkan data masukkan (input) melalui formulir yang dibuat menggunakan streamlit UI.
 
 * Catatan:
   - Sistem Risk Assessment yang telah dikembangkan tidak berperan sebagai pengganti uji analisis laboratorium, melainkan sebagai alat bantu (tools) untuk mempermudah analisis lanjutan.
   - Input manual pada streamlit UI sering kali berbeda dengan distribusi data pada pelatihan model, sehingga lebih mudah terdeteksi sebagai anomali.
 
-## Project Evaluation & Future Improvement
+## **Project Evaluation & Future Improvement**
 - Kalibrasi Threshold
   * Threshold potabilitas saat ini masih bersifat statis sehingga perlu dipantau secara berkala.
   * Pengembangan selanjutnya dapat dipertimbangkan implementasi threshold yang lebih adaptif dan disesuaikan dengan regulasi resmi.
@@ -300,7 +299,7 @@ _**Water Potability Risk Assessment System**_ berhasil mengimplementasikan pende
   * Saat ini output analisis hanya menampilkan risk level & rekomendasi.
   * Analisis dapat dikembangkan lebih detail seperti analisis parameter penyebab anomali. 
 
-## References
+## **References**
 [1] Ekowati, A. P., & Lusno, M. F. D . Analisis Capaian dan Tantangan Akses Air Minum Aman di Indonesia Menuju SDGS 6.1.1 . Jurnal Penelitian Inovatif, 5(2), 1707–1714. (2025). https://doi.org/10.54082/jupin.1538
 
 [2] Alfathi, B. R. 50% Penduduk Indonesia Diprediksi Kekurangan Air Bersih pada 2050. Artikel Lingkungan, GoodStats. (2025). https://data.goodstats.id/statistic/50-penduduk-indonesia-diprediksi-kekurangan-air-bersih-pada-2050-nNSet
