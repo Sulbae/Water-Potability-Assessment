@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import time
 from joblib import load
-import psutil
-
-from preprocess_prediction import data_preprocessing
 
 st.set_page_config(
     page_title="Aplikasi Risk Assessment Monitoring Kelayakan Air",
