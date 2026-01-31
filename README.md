@@ -282,7 +282,9 @@ Konfigurasi Parameter:
 
 ## **Inference**
 
-![inferenc-platform](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/inference/inference_streamlit_1.png)
+![inference-platform](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/inference/inference_streamlit_1.png)
+
+![inference-result](https://github.com/Sulbae/Water-Potability-Assessment/blob/2f328b45c14f4cb1de6014b27bbbec3dde8e619a/assets/inference/inference_streamlit_2.png)
 
 **Streamlit UI** digunakan sebagai platform penerima input data dalam bentuk formulir yang dapat diisi secara manual.
 App: [Coba App](https://water-potability-assessment.streamlit.app/)
