@@ -20,6 +20,7 @@
   - [Model Development](#Model-Development)
     - [Classifier Model](#Classifier-Model)
     - [Anomali Detection Model](#Anomaly-Detection-Model)
+  - [Risk Assessment](#Risk-Assessment)
   - [Inference](#Inference)
   - [Conclusion](#Conclusion)
   - [Project Evaluation & Future Improvement](#Project-Evaluation-&-Future-Improvement)
